@@ -4,7 +4,11 @@ const validator = require("validator");
 
 var Schema = mongoose.Schema;
 
-const FoodDetails = new Schema({
+const FoodMeal = new Schema({
+    image: {
+        type: Buffer
+    },
+
     calories: {
         type: Number
     },
@@ -41,11 +45,11 @@ const Medicine = new Schema({
     image: {
         type: Buffer
     },
-    frequency: {
+    freq: {
         type: Number,
         required: true
     },
-    duration: {
+    dur: {
         type: Number,
         required: true
     }
@@ -130,6 +134,14 @@ const Patient = mongoose.model("Patient", {
         }
     },
 
+    height: {
+        type: Number
+    },
+
+    weight: {
+        type: Number
+    },
+
     bloodGroup: {
         type: String,
 
@@ -151,12 +163,31 @@ const Patient = mongoose.model("Patient", {
         }
     },
     avatar: {
-        type: Buffer
+        type: Buffer,
+        default: undefined
     },
-    prescitions: [Prescription],
+    prescriptions: [Prescription],
     reports: [Report],
-    runningMedicine: ["medicine"],
-    FoodDetails: [FoodDetails]
+    runningMedicines: ["medicine"],
+    FoodDetails: {
+        breakfast: {
+            type: FoodMeal,
+            default: null
+        },
+        lunch: {
+            type: FoodMeal,
+            default: null
+        },
+
+        snacks: {
+            type: FoodMeal,
+            default: null
+        },
+        dinner: {
+            type: FoodMeal,
+            default: null
+        }
+    }
 });
 
 /*
